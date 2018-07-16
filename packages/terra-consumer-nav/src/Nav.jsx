@@ -53,6 +53,8 @@ const propTypes = {
    * Callback function: should be used to close the nav on mobile devices.
    */
   onRequestClose: PropTypes.func.isRequired,
+
+  navItemClick: PropTypes.func,
 };
 
 const defaultProps = {
@@ -75,6 +77,7 @@ class Nav extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.handleOpenProfile = this.handleOpenProfile.bind(this);
     this.handleProfileLinkClick = this.handleProfileLinkClick.bind(this);
+    this.itemClick = this.itemClick.bind(this);
   }
 
   handleOpenProfile(modalContent, numberOfLinks) {
@@ -105,9 +108,16 @@ class Nav extends React.Component {
     });
   }
 
+  itemClick(item, event) {
+    if(this.props.navItemClick) {
+      this.props.navItemClick(item, event);
+    }
+    this.props.onRequestClose();
+  }
+
   render() {
     const {
-      navItems, profile, logo, onRequestClose, ...customProps
+      navItems, profile, logo, onRequestClose, navItemClick, ...customProps
     } = this.props;
     const profileId = 'profile-popup-button';
     const defaultElement = (
@@ -144,7 +154,7 @@ class Nav extends React.Component {
           <Button icon={<IconClose />} className={cx('close-button')} onClick={() => { onRequestClose(); }} variant="utility" text="Close" />
         </div>
         <NavLogo {...logo} />
-        <NavItems navItems={navItems} handleClick={onRequestClose} />
+        <NavItems navItems={navItems} handleClick={this.itemClick} />
         <ResponsiveElement responsiveTo="window" defaultElement={defaultElement} medium={popup} />
         { profile &&
           <div className={cx('profile')}>

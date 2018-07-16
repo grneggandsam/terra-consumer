@@ -4,6 +4,10 @@ import IconPerson from 'terra-icon/lib/icon/IconPerson';
 import Layout from '../src/Layout';
 import './DexTheme.scss';
 
+const navClick = (item, event) => {
+  console.log("in navClick", item, event);
+};
+
 const data = {
   nav: {
     navItems: [
@@ -101,6 +105,7 @@ const data = {
       signinUrl: 'http://localhost:8080/',
       signoutUrl: 'http://localhost:8080/',
     },
+    navItemClick: navClick,
   },
 
   helpItems: [
