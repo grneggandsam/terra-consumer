@@ -61,9 +61,11 @@ class NavItems extends Component {
   }
 
   handleToggle(toggleId, isOpen) {
+    console.log('toggle run');
     this.setState({
       openToggle: isOpen ? toggleId : null,
     });
+    console.log('Toggle detected: ', this.state.openToggle);
   }
 
   render() {

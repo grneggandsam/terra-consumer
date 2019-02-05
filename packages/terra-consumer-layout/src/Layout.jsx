@@ -62,6 +62,7 @@ class Layout extends React.Component {
     this.setState({
       isMobileNavOpen: !this.state.isMobileNavOpen,
     });
+    console.log('nav clicked', this.state.isMobileNavOpen);
   }
   render() {
     const {
